@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/michaladennis/vhdl_labs/lab1/lab1.srcs/sources_1/new/seg7_hex.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'seg7_hex'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/michaladennis/vhdl_labs/lab1/lab1.srcs/sources_1/new/lab1_top.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'lab1_top'
