@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Wed Sep 16 23:06:16 2026
+# Process ID: 5504
+# Current directory: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab2/lab2.runs/impl_1
+# Command line: vivado.exe -log lab2_top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source lab2_top.tcl -notrace
+# Log file: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab2/lab2.runs/impl_1/lab2_top.vdi
+# Journal file: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab2/lab2.runs/impl_1\vivado.jou
+# Running On        :MICHALADENND5D2
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :Apple Silicon
+# CPU Frequency     :3200 MHz
+# CPU Physical cores:4
+# CPU Logical cores :4
+# Host memory       :6435 MB
+# Swap memory       :4297 MB
+# Total Virtual     :10733 MB
+# Available Virtual :2196 MB
+#-----------------------------------------------------------
+source lab2_top.tcl -notrace
