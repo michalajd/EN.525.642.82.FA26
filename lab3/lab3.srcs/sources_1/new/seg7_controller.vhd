@@ -48,15 +48,17 @@ begin
     
     khzdiv_inst : entity work.pulseGenerator port map (clk, rst, maxCount, pulse_1khz);
     -- Process to count the pulses from 0-7
-    process (pulse_1khz, rst)
+    process (clk, rst)
     begin
         if(rst = '1') then
             counter <= (others=>'0');
-        elsif(rising_edge(pulse_1khz)) then
-            if (clear = '1') then
+        elsif(rising_edge(clk)) then
+            if (pulse_1khz = '1') then
+		      if (clear = '1') then
                 counter <= (others=>'0');
-            else
+              else
                 counter <= counter + 1;
+		      end if;
             end if;
         end if;
     end process;

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
-| Date         : Thu Oct  1 00:19:39 2026
+| Date         : Thu Oct  1 23:40:29 2026
 | Host         : MICHALADENND5D2 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file lab3_top_utilization_synth.rpt -pb lab3_top_utilization_synth.pb
 | Design       : lab3_top
@@ -115,7 +115,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +------------+------+-------+------------+-----------+-------+
 |  Site Type | Used | Fixed | Prohibited | Available | Util% |
 +------------+------+-------+------------+-----------+-------+
-| BUFGCTRL   |    2 |     0 |          0 |        32 |  6.25 |
+| BUFGCTRL   |    1 |     0 |          0 |        32 |  3.13 |
 | BUFIO      |    0 |     0 |          0 |        24 |  0.00 |
 | MMCME2_ADV |    0 |     0 |          0 |         6 |  0.00 |
 | PLLE2_ADV  |    0 |     0 |          0 |         6 |  0.00 |
@@ -154,12 +154,11 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | OBUF     |   32 |                  IO |
 | IBUF     |   18 |                  IO |
 | LUT6     |   14 |                 LUT |
+| LUT4     |   14 |                 LUT |
 | CARRY4   |   14 |          CarryLogic |
-| LUT4     |   13 |                 LUT |
 | LUT3     |   11 |                 LUT |
 | MUXF7    |    4 |               MuxFx |
-| BUFG     |    2 |               Clock |
-| LUT1     |    1 |                 LUT |
+| BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 
 

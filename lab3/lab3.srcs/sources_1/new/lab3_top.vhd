@@ -52,13 +52,15 @@ begin
     pulseOut => sr_enb);
     
     --Implement shift register
-    process(sr_enb, BTNC)
+    process(CLK100MHZ, BTNC)
     begin
         if(BTNC = '1') then
             r <= (others=>"0000");
-        elsif(rising_edge(sr_enb)) then
-            r <= r(6 downto 0) & "0000";
-            r(0) <= binary_sw;
+        elsif(rising_edge(CLK100MHZ)) then
+	        if (sr_enb = '1') then
+            	r <= r(6 downto 0) & "0000";
+            	r(0) <= binary_sw;
+	       end if;
         end if;
     end process;
 end Behavioral;

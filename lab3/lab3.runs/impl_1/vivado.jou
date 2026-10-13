@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Thu Oct  1 00:21:49 2026
-# Process ID: 6480
+# Start of session at: Thu Oct  1 23:43:52 2026
+# Process ID: 11956
 # Current directory: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab3/lab3.runs/impl_1
 # Command line: vivado.exe -log lab3_top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source lab3_top.tcl -notrace
 # Log file: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab3/lab3.runs/impl_1/lab3_top.vdi
@@ -17,8 +17,8 @@
 # CPU Physical cores:4
 # CPU Logical cores :4
 # Host memory       :6435 MB
-# Swap memory       :4223 MB
-# Total Virtual     :10659 MB
-# Available Virtual :2161 MB
+# Swap memory       :6174 MB
+# Total Virtual     :12609 MB
+# Available Virtual :7367 MB
 #-----------------------------------------------------------
 source lab3_top.tcl -notrace
