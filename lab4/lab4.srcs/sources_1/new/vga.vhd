@@ -107,8 +107,8 @@ begin
 
             if big_C(char_y)(31 - char_x) = '1' then
                 red_out   <= '1';
-                green_out <= '1';
-                blue_out  <= '1';
+                green_out <= '0';
+                blue_out  <= '0';
             end if;
         end if;
 

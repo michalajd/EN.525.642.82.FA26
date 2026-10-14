@@ -49,6 +49,9 @@ signal h_cnt : unsigned (9 downto 0); -- horizontal counter
 signal v_cnt : unsigned (9 downto 0); -- vertical counter
 signal h_clear : std_logic; -- clear signal for horizontal count
 signal v_clear : std_logic; -- clear signal for vertical count
+signal vgaRedT : std_logic; -- enb for red
+signal vgaBlueT : std_logic; -- enb for blue
+signal vgaGreenT : std_logic; --enb for green
 
 begin
     -- Create 25MHz enable pulse
@@ -62,7 +65,7 @@ begin
     -- Sequential process for the two counters
     process (CLK, RST)
     begin
-        if rst = '1' then
+        if RST = '1' then
             h_max <= (others=>'0');
             v_max <= (others=>'0');
         elsif rising_edge(CLK) then
@@ -82,8 +85,33 @@ begin
 		        end if;
             end if;
         end if;
-        h_clear <= '1' when (h_cnt = h_max) else '0';
-        v_clear <= '1' when (v_cnt = v_max) else '0';
     end process;
+    
+    h_clear <= '1' when (h_cnt = h_max) else '0';
+    v_clear <= '1' when (v_cnt = v_max) else '0';
+    
+    -- Assign VGA Horizontal and Vertical Syncs
+    VGA_HS <= '1' when ((h_cnt >= 656) and (h_cnt < 752)) else '0';
+    VGA_VS <= '1' when ((v_cnt >= 490) and (v_cnt < 492)) else '0';
+    
+    -- Process for red
+    process (h_cnt, v_cnt)
+    begin
+        if (h_cnt > 640) then
+            if (v_cnt > 480) then
+                vgaRedT <= '1';
+            else vgaRedT <= '0';
+            end if;
+        end if;
+    end process;
+    
+    -- CSAs for blue and green
+    vgaBlueT <= '0';
+    vgaGreenT <= '0';
+    
+    -- Assign color outputs
+    VGA_R <= (others => vgaRedT);
+    VGA_B <= (others => vgaBlueT);
+    VGA_G <= (others => vgaGreenT);
 
 end Behavioral;

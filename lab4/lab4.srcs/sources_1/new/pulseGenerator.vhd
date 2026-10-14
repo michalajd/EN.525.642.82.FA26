@@ -5,12 +5,12 @@ use IEEE.NUMERIC_STD.ALL;
 entity pulseGenerator is
     Port ( clk : in STD_LOGIC;
            reset : in STD_LOGIC;
-           maxCount : in unsigned(26 downto 0);
+           maxCount : in unsigned(5 downto 0);
            pulseOut : out STD_LOGIC);
 end pulseGenerator;
 
 architecture Behavioral of pulseGenerator is
-signal pulseCnt : unsigned(26 downto 0);
+signal pulseCnt : unsigned(5 downto 0);
 signal clear : std_logic;
     begin
     --Pulse Generator
