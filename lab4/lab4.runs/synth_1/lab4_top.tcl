@@ -57,7 +57,11 @@ if {$::dispatch::connected} {
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 1
+set_param checkpoint.writeSynthRtdsInDcp 1
+set_param synth.incrementalSynthesisCache C:/Users/michaladennis/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-11832-MICHALADENND5D2/incrSyn
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -75,6 +79,10 @@ OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
   C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.srcs/sources_1/new/pulseGenerator.vhd
   C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.srcs/sources_1/new/lab4_top.vhd
+  C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.srcs/sources_1/new/vga.vhd
+  C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.srcs/sources_1/new/debounce.vhd
+  C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.srcs/sources_1/new/seg7_hex.vhd
+  C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.srcs/sources_1/new/seg7_controller.vhd
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

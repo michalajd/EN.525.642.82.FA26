@@ -24,12 +24,12 @@ use IEEE.NUMERIC_STD.ALL;
 library UNISIM;
 
 entity VGA is
-    Port ( red_out : out STD_LOGIC;
-           green_out : out STD_LOGIC;
-           blue_out : out STD_LOGIC;
-           hs_out : out STD_LOGIC;
-           vs_out : out STD_LOGIC;
-           clk100_in : in STD_LOGIC);
+    Port ( VGA_R     : out std_logic_vector (3 downto 0); --vga red input
+           VGA_B     : out std_logic_vector (3 downto 0); --vga blue input
+           VGA_G     : out std_logic_vector (3 downto 0); --vga green input
+           VGA_HS : out STD_LOGIC;
+           VGA_VS : out STD_LOGIC;
+           CLK : in STD_LOGIC);
 end VGA;
 
 architecture Behavioral of VGA is
@@ -84,16 +84,16 @@ constant C_Y : integer := SCREEN_HEIGHT / 2 - C_HEIGHT / 2;
 begin
 
 --generate a 50Mhz clock
-process (clk100_in)
+process (CLK)
     variable x, y   : integer;
     variable char_x, char_y : integer;
 begin
 
-    if clk100_in'event and clk100_in = '1' then
+    if CLK'event and CLK = '1' then
         -- Default to black
-        red_out   <= '0';
-        green_out <= '0';
-        blue_out  <= '0';
+        VGA_R   <= "0000";
+        VGA_G <= "0000";
+        VGA_B  <= "0000";
 
         x := to_integer(horizontal_counter);
         y := to_integer(vertical_counter);
@@ -106,24 +106,24 @@ begin
             char_y := y - C_Y;
 
             if big_C(char_y)(31 - char_x) = '1' then
-                red_out   <= '1';
-                green_out <= '0';
-                blue_out  <= '0';
+                VGA_R   <= "1111";
+                VGA_G <= "0000";
+                VGA_B  <= "1111";
             end if;
         end if;
 
         -- Horizontal sync
         if horizontal_counter < 112 then
-            hs_out <= '0';
+            VGA_HS <= '0';
         else
-            hs_out <= '1';
+            VGA_HS <= '1';
         end if;
 
         -- Vertical sync
         if vertical_counter < 3 then
-            vs_out <= '0';
+            VGA_VS <= '0';
         else
-            vs_out <= '1';
+            VGA_VS <= '1';
         end if;
 
         -- Horizontal Counter

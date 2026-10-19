@@ -3,11 +3,11 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Oct 14 02:26:52 2026
-# Process ID: 7960
+# Start of session at: Sun Oct 18 23:35:06 2026
+# Process ID: 6824
 # Current directory: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.runs/impl_1
-# Command line: vivado.exe -log VGA.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source VGA.tcl -notrace
-# Log file: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.runs/impl_1/VGA.vdi
+# Command line: vivado.exe -log lab4_top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source lab4_top.tcl -notrace
+# Log file: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.runs/impl_1/lab4_top.vdi
 # Journal file: C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab4/lab4.runs/impl_1\vivado.jou
 # Running On        :MICHALADENND5D2
 # Platform          :Windows Server 2016 or Windows 10
@@ -17,8 +17,8 @@
 # CPU Physical cores:4
 # CPU Logical cores :4
 # Host memory       :6435 MB
-# Swap memory       :4831 MB
-# Total Virtual     :11267 MB
-# Available Virtual :4764 MB
+# Swap memory       :4266 MB
+# Total Virtual     :10701 MB
+# Available Virtual :2109 MB
 #-----------------------------------------------------------
-source VGA.tcl -notrace
+source lab4_top.tcl -notrace
