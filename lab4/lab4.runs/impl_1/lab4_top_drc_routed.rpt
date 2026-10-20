@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
-| Date         : Sun Oct 18 23:48:48 2026
+| Date         : Tue Oct 20 18:54:50 2026
 | Host         : MICHALADENND5D2 running 64-bit major release  (build 9200)
 | Command      : report_drc -file lab4_top_drc_routed.rpt -pb lab4_top_drc_routed.pb -rpx lab4_top_drc_routed.rpx
 | Design       : lab4_top
@@ -24,12 +24,12 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 6
+             Violations found: 3
 +-------------+----------+-------------------------------------------------------------+------------+
 | Rule        | Severity | Description                                                 | Violations |
 +-------------+----------+-------------------------------------------------------------+------------+
 | CFGBVS-1    | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties         | 1          |
-| PDRC-153    | Warning  | Gated clock check                                           | 4          |
+| PDRC-153    | Warning  | Gated clock check                                           | 1          |
 | PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 1          |
 +-------------+----------+-------------------------------------------------------------+------------+
 
@@ -50,22 +50,7 @@ Related violations: <none>
 
 PDRC-153#1 Warning
 Gated clock check  
-Net VGA_R_reg[3]_i_2_n_0 is a gated clock net sourced by a combinational pin VGA_R_reg[3]_i_2/O, cell VGA_R_reg[3]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
-Related violations: <none>
-
-PDRC-153#2 Warning
-Gated clock check  
-Net down_debounce/E[0] is a gated clock net sourced by a combinational pin down_debounce/x_square_reg[7]_i_2/O, cell down_debounce/x_square_reg[7]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
-Related violations: <none>
-
-PDRC-153#3 Warning
-Gated clock check  
-Net down_debounce/switch_reg_0[0] is a gated clock net sourced by a combinational pin down_debounce/y_square_reg[7]_i_2/O, cell down_debounce/y_square_reg[7]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
-Related violations: <none>
-
-PDRC-153#4 Warning
-Gated clock check  
-Net inst_seg7/khzdiv_inst/CLK is a gated clock net sourced by a combinational pin inst_seg7/khzdiv_inst/counter[2]_i_2/O, cell inst_seg7/khzdiv_inst/counter[2]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net inst_seg7/khzdiv_inst/pulseCnt_reg[9]_0 is a gated clock net sourced by a combinational pin inst_seg7/khzdiv_inst/counter[2]_i_2/O, cell inst_seg7/khzdiv_inst/counter[2]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PLHOLDVIO-2#1 Warning

@@ -59,9 +59,9 @@ signal btnl_db : std_logic; -- debounced left button
 signal btnr_db : std_logic; -- debounced right button
 signal x_coord : std_logic_vector (7 downto 0);
 signal y_coord : std_logic_vector (7 downto 0);
---signal vgaRedT : std_logic; -- enb for red
---signal vgaBlueT : std_logic; -- enb for blue
---signal vgaGreenT : std_logic; --enb for green
+signal vgaRedT : std_logic; -- enb for red
+signal vgaBlueT : std_logic; -- enb for blue
+signal vgaGreenT : std_logic; --enb for green
 
 begin
     -- Create 25MHz enable pulse
@@ -102,62 +102,86 @@ begin
     
     
     -- Sequential process for the two counters
+--    counters: process (CLK, RST)
+--    begin
+--        if RST = '1' then
+--            h_cnt <= (others=>'0');
+--            v_cnt <= (others=>'0');
+--        elsif rising_edge(CLK) then
+--            if en25 = '1' then
+--                -- Statements for horizontal counter
+--                if (h_clear = '1') then
+--                    h_cnt <= (others=>'0');
+                    
+--                    -- Statements for vertical counter
+--		            if (v_clear = '1') then
+--                        v_cnt <= (others=>'0');
+--                    else
+--                        v_cnt <= v_cnt + 1;
+--		            end if;
+--                else
+--                    h_cnt <= h_cnt + 1;
+--		        end if;
+--            end if;
+--        end if;
+--    end process counters;
+    
+--    h_clear <= '1' when (h_cnt = h_max) else '0';
+--    v_clear <= '1' when (v_cnt = v_max) else '0';
+
     counters: process (CLK, RST)
     begin
-        if RST = '1' then
-            h_cnt <= (others=>'0');
-            v_cnt <= (others=>'0');
-        elsif rising_edge(CLK) then
-            if en25 = '1' then
-                -- Statements for horizontal counter
-                if (h_clear = '1') then
-                    h_cnt <= (others=>'0');
-                    
-                    -- Statements for vertical counter
-		            if (v_clear = '1') then
-                        v_cnt <= (others=>'0');
-                    else
-                        v_cnt <= v_cnt + 1;
-		            end if;
-                else
+        if (rst = '1') then
+            h_cnt <= (others => '0');
+            v_cnt <= (others => '0');
+        elsif (rising_edge(CLK)) then
+            if (en25 = '1') then
+                if (h_cnt < 799) then
                     h_cnt <= h_cnt + 1;
-		        end if;
+                else
+                    h_cnt <= (others => '0');
+                    if (v_cnt < 520) then
+                        v_cnt <= v_cnt + 1;
+                    else
+                        v_cnt <= (others => '0');
+                    end if;
+                end if;
+            
             end if;
         end if;
     end process counters;
-    
-    h_clear <= '1' when (h_cnt = h_max) else '0';
-    v_clear <= '1' when (v_cnt = v_max) else '0';
     
     -- Assign VGA Horizontal and Vertical Syncs
     VGA_HS <= '1' when ((h_cnt >= 656) and (h_cnt < 752)) else '0'; -- 640+front porch, 800-back porch
     VGA_VS <= '1' when ((v_cnt >= 490) and (v_cnt < 492)) else '0'; -- 480+front porch, 525-back porch
     
     -- Process to move the red square
-    square : process (RST, btnu_db, btnd_db, btnl_db, btnr_db)
+    square : process (CLK, RST)
     begin
         if (RST = '1') then
             x_square <= x_default;
             y_square <= y_default;
-        elsif (btnu_db = '1') then
-            if (y_square = "00000000") then
-                y_square <= "00001101";
-            else y_square <= y_square - 1;
-            end if;
-        elsif (btnd_db = '1') then
-            if (y_square = "00001101") then
-                y_square <= "00000000";
-            else y_square <= y_square + 1;
-            end if;
-        elsif (btnl_db = '1') then
-            if (x_square <= "00000000") then
-                x_square <= "00010011";
-            else x_square <= x_square - 1;
-            end if;
-        elsif (btnr_db = '1') then
-            if (x_square <= "00010011") then
-                x_square <= "00000000";
-            else x_square <= x_square + 1;
+        elsif (rising_edge(CLK)) then
+            if (btnu_db = '1') then
+                if (y_square = "00000000") then
+                    y_square <= "00001101";
+                else y_square <= y_square - 1;
+                end if;
+            elsif (btnd_db = '1') then
+                if (y_square = "00001101") then
+                    y_square <= "00000000";
+                else y_square <= y_square + 1;
+                end if;
+            elsif (btnl_db = '1') then
+                if (x_square = "00000000") then
+                    x_square <= "00010011";
+                else x_square <= x_square - 1;
+                end if;
+            elsif (btnr_db = '1') then
+                if (x_square = "00010011") then
+                    x_square <= "00000000";
+                else x_square <= x_square + 1;
+                end if;
             end if;
         end if;
     end process square;
@@ -166,21 +190,26 @@ begin
     -- Process for red
     process (h_cnt, v_cnt)
     begin
-        if (h_cnt > 640) then
-            if (v_cnt > 480) then
-                VGA_R <= "1111";
-            else VGA_R <= "0000";
+        if ((h_cnt >= 0) and (h_cnt < 640) and (v_cnt >= 0) and (v_cnt < 480)) then
+            if ((h_cnt(5) = '1') xor (v_cnt(5) = '1')) then
+                vgaBlueT <= '1';
+                vgaRedT <= '0';
+                vgaGreenT <= '0';
+            else
+                vgaBlueT <= '0';
+                vgaRedT <= '0';
+                vgaGreenT <= '1';
             end if;
+        else 
+            vgaRedT <= '0';
+            vgaBlueT <= '0';
+            vgaGreenT <= '0';
         end if;
     end process;
     
-    -- CSAs for blue and green
-    --vgaBlueT <= '0';
-    --vgaGreenT <= '0';
-    
     -- Assign color outputs
-    --VGA_R <= "1111";--(others => vgaRedT);
-    VGA_B <= "0000";--(others => vgaBlueT);
-    VGA_G <= "0000";--(others => vgaGreenT);
+    VGA_R <= (others => vgaRedT);
+    VGA_B <= (others => vgaBlueT);
+    VGA_G <= (others => vgaGreenT);
 
 end Behavioral;

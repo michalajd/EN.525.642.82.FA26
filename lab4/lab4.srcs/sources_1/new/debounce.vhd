@@ -32,29 +32,33 @@ end debounce;
 
 architecture Behavioral of debounce is
 signal counter : unsigned (23 downto 0); -- generate counter
-signal count_max : unsigned (23 downto 0); -- generate counter
 signal switch : std_logic; -- internal switch to track state
+signal button_db : std_logic; -- internal register
+signal switch_delay : std_logic; 
  
 begin
     process (clk,rst)
-        begin
+    begin
         if (rst='1') then
             switch <= '0';
             counter <= (others=>'0');
+            switch_delay <= '0';
         elsif (rising_edge(clk)) then
+            switch_delay <= switch;
             if button_in = '1' then
                 if counter < 10000000 then
-                counter <= counter + 1;
+                    counter <= counter + 1;
+                    switch <= '0';
+                else
+                    switch <= '1';
+                end if;
             else
-                switch <= '1';
+                switch <= '0';
+                counter <= (others=>'0');
             end if;
-        else
-            switch <= '0';
-            counter <= (others=>'0');
         end if;
-    end if;
-end process;
+    end process;
     
-    button_out <= switch;
+    button_out <= '1' when ((switch_delay = '0') and (switch = '1')) else '0';
 
 end Behavioral;
