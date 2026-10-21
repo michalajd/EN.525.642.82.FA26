@@ -99,35 +99,6 @@ begin
         char7 => "0000",
         char_enc => SEG7_CATH,
         anode => AN);
-    
-    
-    -- Sequential process for the two counters
---    counters: process (CLK, RST)
---    begin
---        if RST = '1' then
---            h_cnt <= (others=>'0');
---            v_cnt <= (others=>'0');
---        elsif rising_edge(CLK) then
---            if en25 = '1' then
---                -- Statements for horizontal counter
---                if (h_clear = '1') then
---                    h_cnt <= (others=>'0');
-                    
---                    -- Statements for vertical counter
---		            if (v_clear = '1') then
---                        v_cnt <= (others=>'0');
---                    else
---                        v_cnt <= v_cnt + 1;
---		            end if;
---                else
---                    h_cnt <= h_cnt + 1;
---		        end if;
---            end if;
---        end if;
---    end process counters;
-    
---    h_clear <= '1' when (h_cnt = h_max) else '0';
---    v_clear <= '1' when (v_cnt = v_max) else '0';
 
     counters: process (CLK, RST)
     begin
@@ -191,7 +162,11 @@ begin
     process (h_cnt, v_cnt)
     begin
         if ((h_cnt >= 0) and (h_cnt < 640) and (v_cnt >= 0) and (v_cnt < 480)) then
-            if ((h_cnt(5) = '1') xor (v_cnt(5) = '1')) then
+            if (((h_cnt >= (32 * x_square)) and (h_cnt < (32 * (x_square + 1)))) and ((v_cnt >= (32 * y_square)) and (v_cnt < (32 * (y_square + 1))))) then
+                vgaBlueT <= '0';
+                vgaRedT <= '1';
+                vgaGreenT <= '0';
+            elsif ((h_cnt(5) = '1') xor (v_cnt(5) = '1')) then
                 vgaBlueT <= '1';
                 vgaRedT <= '0';
                 vgaGreenT <= '0';
