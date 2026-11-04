@@ -1,0 +1,8 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../lab5.srcs/sources_1/new/accel_spi_rw.vhd" \
+"../../../../lab5_ex_files/acl_model_v2.vhd" \
+"../../../../lab5_ex_files/accel_spi_rw_tb.vhd" \
+
+# Do not sort compile order
+nosort
