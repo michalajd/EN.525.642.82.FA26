@@ -1,4 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab5/lab5.srcs/sources_1/new/accel_spi_rw.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'accel_spi_rw'
 INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/michaladennis/vhdl_labs/EN.525.642.82.FA26/lab5/lab5_ex_files/accel_spi_rw_tb.vhd" into library xil_defaultlib
 INFO: [VRFC 10-3107] analyzing entity 'accel_spi_rw_tb'

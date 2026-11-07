@@ -55,10 +55,38 @@ begin
 		wait for 100 ns;
 		reset <= '0';
 		
-		--TODO: Add Verification for DATA_X, Y, Z, and ID_AD/1D
 		--TODO: Verify acl_enabled goes high after initial write
-		--			This can be done through the waveform viewer or by writing checks in the testbench
+		wait for 50 us;
 		
+		assert acl_enabled = '1'
+		report "Error: Accelerometer was not successfully enabled."
+		severity failure;
+		
+		--TODO: Add Verification for DATA_X, Y, Z, and ID_AD/1D
+		wait for 200 us;
+		
+		assert ID_AD = x"AD"
+		report "Error: ID_AD expected 0xAD"
+		severity failure;
+		
+		assert ID_1D = x"1D"
+		report "Error: ID_1D expected 0x1D"
+		severity failure;
+		
+		assert DATA_X = x"12"
+		report "Error: DATA_X expected 0x12"
+		severity failure;
+		
+		assert DATA_Y = x"34"
+		report "Error: DATA_Y expected 0x34"
+		severity failure;
+		
+		assert DATA_Z = x"56"
+		report "Error: DATA_Z expected 0x56"
+		severity failure;
+	   
+	   -- Report if everything passed
+	   report "The accel_spi_rw testbench has passed" severity note;
 		wait;
 	end process;
 	
